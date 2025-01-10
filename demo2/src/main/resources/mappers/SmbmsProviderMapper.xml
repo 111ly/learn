@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+namespace:对应接口的全限定名（从包名到类名）
+-->
+<mapper namespace="com.example.dao.SmbmsProviderDao">
+
+    <resultMap id="provider" type="com.example.entity.SmbmsProvider">
+        <result property="proCode" column="proCode"/>
+        <result property="proName" column="proName"/>
+        <result property="proContact" column="proContact"/>
+        <result property="proPhone" column="proPhone"/>
+        <result property="proFax" column="proFax"/>
+    </resultMap>
+    <select id="showProviderList" resultMap="provider">
+        select * from smbms_provider
+        <where>
+            <if test="name !=null">
+                proName like concat("%",#{name},'%')
+            </if>
+        </where>
+    </select>
+</mapper>
